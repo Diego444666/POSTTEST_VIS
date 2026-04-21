@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2026 at 04:15 PM
+-- Generation Time: Apr 21, 2026 at 02:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_nilai_siswa`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_catatan_siswa`
+--
+
+CREATE TABLE `tb_catatan_siswa` (
+  `id` int(11) NOT NULL,
+  `id_nilai` int(11) NOT NULL,
+  `catatan` varchar(255) NOT NULL,
+  `tanggal` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -48,6 +61,13 @@ INSERT INTO `tb_nilai` (`id`, `nama_siswa`, `kelas`, `mata_pelajaran`, `nilai`, 
 --
 
 --
+-- Indexes for table `tb_catatan_siswa`
+--
+ALTER TABLE `tb_catatan_siswa`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_catatan_nilai` (`id_nilai`);
+
+--
 -- Indexes for table `tb_nilai`
 --
 ALTER TABLE `tb_nilai`
@@ -58,10 +78,26 @@ ALTER TABLE `tb_nilai`
 --
 
 --
+-- AUTO_INCREMENT for table `tb_catatan_siswa`
+--
+ALTER TABLE `tb_catatan_siswa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tb_nilai`
 --
 ALTER TABLE `tb_nilai`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tb_catatan_siswa`
+--
+ALTER TABLE `tb_catatan_siswa`
+  ADD CONSTRAINT `fk_catatan_nilai` FOREIGN KEY (`id_nilai`) REFERENCES `tb_nilai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
